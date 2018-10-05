@@ -48,3 +48,26 @@ exports[`Translate components passes default \`de_DE\` translated strings to wra
   </SomeTestComponent>
 </Component>
 `;
+
+exports[`Translate components passes translated strings alongside default fallbacks to wrapped components 1`] = `
+<Component>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    title="Good day, Sir."
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Good day, Sir.
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;

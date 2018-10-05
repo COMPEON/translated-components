@@ -28,9 +28,7 @@ const translations = {
     message: 'Hier wird nie etwas anderes stehen.'
   },
   en_GB: {
-    title: 'Good day, Sir.',
-    'kebab-label': 'How about a cup of tea?',
-    message: 'A pleasent afternoon, isn\'t it?'
+    title: 'Good day, Sir.'
   },
   en_US: {
     message: 'Let\'s eat {numBurgers, plural, =0 {no burgers} =1 {one burger} other {# burgers}} today.'
@@ -61,5 +59,9 @@ describe('Translate components', () => {
 
   it('passes default `de_DE` translated strings to wrapped components', () => {
     expect(subject({})).toMatchSnapshot()
+  })
+
+  it('passes translated strings alongside default fallbacks to wrapped components', () => {
+    expect(subject({locale: 'en_GB'})).toMatchSnapshot()
   })
 })
