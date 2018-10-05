@@ -205,3 +205,29 @@ exports[`Translate components passes translated strings alongside default fallba
   </SomeTestComponent>
 </Component>
 `;
+
+exports[`Translate components transforms template params with supplied functions 1`] = `
+<Component
+  interpolated="french"
+>
+  <SomeTestComponent
+    interpolated="french"
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    title="This is going to be really FRENCH!"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      This is going to be really FRENCH!
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;

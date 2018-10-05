@@ -78,4 +78,8 @@ describe('Translate components', () => {
     expect(subject({locale: 'en_US', numBurgers: 1})).toMatchSnapshot()
     expect(subject({locale: 'en_US', numBurgers: 99})).toMatchSnapshot()
   })
+
+  it('transforms template params with supplied functions', () => {
+    expect(subject({locale: 'fr_FR', interpolated: 'french'})).toMatchSnapshot()
+  })
 })
