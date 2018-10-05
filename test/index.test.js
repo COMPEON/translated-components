@@ -24,8 +24,11 @@ const translations = {
   },
   de_AT: {
     title: 'Dies ist ein {customTitle}',
-    'kebab-label': 'Du hast {euros, number, money} Euros!',
+    'kebab-label': 'Du hast {amount, number, money}!',
     message: 'Hier wird nie etwas anderes stehen.'
+  },
+  de_CH: {
+    'kebab-label': 'Du hast {amount, number, money}!'
   },
   en_GB: {
     title: 'Good day, Sir.'
@@ -63,5 +66,10 @@ describe('Translate components', () => {
 
   it('passes translated strings alongside default fallbacks to wrapped components', () => {
     expect(subject({locale: 'en_GB'})).toMatchSnapshot()
+  })
+
+  it('formats money correctly for the language', () => {
+    expect(subject({locale: 'de_AT', customTitle: 'Zipfelklatschr', amount: 42.37})).toMatchSnapshot()
+    expect(subject({locale: 'de_CH', customTitle: 'Toblerone', amount: 2500.01})).toMatchSnapshot()
   })
 })

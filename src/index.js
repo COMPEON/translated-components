@@ -9,6 +9,7 @@ const DEFAULT_LOCALE = 'de_DE'
 
 const CURRENCY_BY_REGION = {
   AT: 'EUR',
+  CH: 'CHF',
   DE: 'EUR',
   FR: 'EUR',
   GB: 'GPB',
