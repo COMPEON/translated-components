@@ -72,4 +72,10 @@ describe('Translate components', () => {
     expect(subject({locale: 'de_AT', customTitle: 'Zipfelklatschr', amount: 42.37})).toMatchSnapshot()
     expect(subject({locale: 'de_CH', customTitle: 'Toblerone', amount: 2500.01})).toMatchSnapshot()
   })
+
+  it('handles pluralisation', () => {
+    expect(subject({locale: 'en_US', numBurgers: 0})).toMatchSnapshot()
+    expect(subject({locale: 'en_US', numBurgers: 1})).toMatchSnapshot()
+    expect(subject({locale: 'en_US', numBurgers: 99})).toMatchSnapshot()
+  })
 })

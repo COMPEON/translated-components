@@ -82,6 +82,84 @@ exports[`Translate components formats money correctly for the language 2`] = `
 </Component>
 `;
 
+exports[`Translate components handles pluralisation 1`] = `
+<Component
+  numBurgers={0}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Let's eat no burgers today."
+    numBurgers={0}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Let's eat no burgers today.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components handles pluralisation 2`] = `
+<Component
+  numBurgers={1}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Let's eat one burger today."
+    numBurgers={1}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Let's eat one burger today.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components handles pluralisation 3`] = `
+<Component
+  numBurgers={99}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Let's eat 99 burgers today."
+    numBurgers={99}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Let's eat 99 burgers today.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
 exports[`Translate components passes default \`de_DE\` translated strings to wrapped components 1`] = `
 <Component>
   <SomeTestComponent
