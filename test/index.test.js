@@ -58,4 +58,8 @@ describe('Translate components', () => {
   it('does not touch non-translation props', () => {
     expect(subject({notToBeTranslated: 99})).toMatchSnapshot()
   })
+
+  it('passes default `de_DE` translated strings to wrapped components', () => {
+    expect(subject({})).toMatchSnapshot()
+  })
 })

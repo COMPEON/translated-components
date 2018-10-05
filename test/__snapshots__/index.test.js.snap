@@ -25,3 +25,26 @@ exports[`Translate components does not touch non-translation props 1`] = `
   </SomeTestComponent>
 </Component>
 `;
+
+exports[`Translate components passes default \`de_DE\` translated strings to wrapped components 1`] = `
+<Component>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
