@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Translate components does not touch non-translation props 1`] = `
+<Component
+  notToBeTranslated={99}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    notToBeTranslated={99}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={99}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
