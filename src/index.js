@@ -1,6 +1,6 @@
 import React from 'react'
 import kebabCase from 'lodash.kebabcase'
-import reduce from 'lodash.reduce'
+import transform from 'lodash.transform'
 import isString from 'lodash.isstring'
 import isNumber from 'lodash.isnumber'
 import IntlFormat from 'intl-messageformat'
@@ -30,7 +30,7 @@ const withTranslation = ({ translations, params = {}, mapTranslationsToProps = p
     const translationsForLocale = locale => translateWithDefaults({
       translations: initializedTranslations,
       locale: locale || DEFAULT_LOCALE,
-      reducer: templateReducer(templateParamValues(props, params))
+      reducer: templateReducer(applyParamFunctions(props, params))
     })
 
     return (
@@ -59,17 +59,17 @@ const moneyFormat = locale => ({
 })
 
 const applyIntlToTranslations = (translations, locale, format) => (
-  reduce(translations, (result, entry, key) => {
+  transform(translations, (result, entry, key) => {
     result[key] = new IntlFormat(entry, kebabCase(locale), {...moneyFormat(locale), ...format})
     return result
-  }, {})
+  })
 )
 
 const initializeTranslations = (translations, format) => (
-  reduce(translations, (result, localeTranslations, locale) => {
+  transform(translations, (result, localeTranslations, locale) => {
     result[locale] = applyIntlToTranslations(localeTranslations, locale, format)
     return result
-  }, {})
+  })
 )
 
 const templateReducer = (values) => (result, v, k) => {
@@ -78,24 +78,24 @@ const templateReducer = (values) => (result, v, k) => {
 }
 
 const cleanParams = params => (
-  reduce(params, (result, v, k) => {
+  transform(params, (result, v, k) => {
     if (isString(v) || isNumber(v)) result[k] = v
     return result
-  }, {})
+  })
 )
 
-const templateParamValues = (props, params) => (
-  reduce(params, (acc, fn, k) => {
-    acc[k] = fn(props)
-    return acc
+const applyParamFunctions = (props, params) => (
+  transform(params, (result, fn, k) => {
+    result[k] = fn(props)
+    return result
   }, cleanParams(props))
 )
 
 const translateWithDefaults = ({ locale, reducer, translations = {} }) => (
-  reduce({
+  transform({
     ...translations[DEFAULT_LOCALE],
     ...translations[locale]
-  }, reducer, {})
+  }, reducer)
 )
 
 export { TranslationProvider, withTranslation }

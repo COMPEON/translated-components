@@ -16,7 +16,7 @@
     "lodash.isnumber": "^3.0.3",
     "lodash.isstring": "^4.0.1",
     "lodash.kebabcase": "^4.1.1",
-    "lodash.reduce": "^4.6.0",
+    "lodash.transform": "^4.6.0",
     "react": "^16.5.2"
   },
   "devDependencies": {
