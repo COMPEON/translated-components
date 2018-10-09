@@ -2156,6 +2156,10 @@ iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
+icu4c-data@62l:
+  version "0.62.2"
+  resolved "https://registry.yarnpkg.com/icu4c-data/-/icu4c-data-0.62.2.tgz#908acc9240ef6e0534fa977f23b0867add89a231"
+
 ignore-walk@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ignore-walk/-/ignore-walk-3.0.1.tgz#a83e62e7d272ac0e3b551aaa82831a19b69f82f8"
