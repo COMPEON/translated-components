@@ -61,14 +61,12 @@ const moneyFormat = locale => ({
 const applyIntlToTranslations = (translations, locale, format) => (
   transform(translations, (result, entry, key) => {
     result[key] = new IntlFormat(entry, kebabCase(locale), {...moneyFormat(locale), ...format})
-    return result
   })
 )
 
 const initializeTranslations = (translations, format) => (
   transform(translations, (result, localeTranslations, locale) => {
     result[locale] = applyIntlToTranslations(localeTranslations, locale, format)
-    return result
   })
 )
 
@@ -80,14 +78,12 @@ const templateReducer = (values) => (result, v, k) => {
 const cleanParams = params => (
   transform(params, (result, v, k) => {
     if (isString(v) || isNumber(v)) result[k] = v
-    return result
   })
 )
 
 const applyParamFunctions = (props, params) => (
   transform(params, (result, fn, k) => {
     result[k] = fn(props)
-    return result
   }, cleanParams(props))
 )
 
