@@ -60,7 +60,7 @@ const moneyFormat = locale => ({
 
 const applyIntlToTranslations = (translations, locale, format) => (
   transform(translations, (result, entry, key) => {
-    result[key] = new IntlFormat(entry, kebabCase(locale), {...moneyFormat(locale), ...format})
+    result[key] = new IntlFormat(entry, kebabCase(locale), { ...moneyFormat(locale), ...format })
   })
 )
 
