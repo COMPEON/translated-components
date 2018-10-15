@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+node_js:
+  - '10'
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+before_install:
+  - export TZ=Europe/Berlin
+
+before_script:
+  - export NODE_ICU_DATA=node_modules/icu4c-data
+
+script:
+  - yarn test

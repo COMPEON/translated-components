@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Translate components does not touch non-translation props 1`] = `
+<Component
+  notToBeTranslated={99}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    notToBeTranslated={99}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={99}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components formats money correctly for the language 1`] = `
+<Component
+  amount={42.37}
+  customTitle="Zipfelklatschr"
+>
+  <SomeTestComponent
+    amount={42.37}
+    customTitle="Zipfelklatschr"
+    kebab-label="Du hast € 42,37!"
+    message="Hier wird nie etwas anderes stehen."
+    title="Dies ist ein Zipfelklatschr"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein Zipfelklatschr
+    </h1>
+    <h2>
+      Du hast € 42,37!
+    </h2>
+    <p>
+      Hier wird nie etwas anderes stehen.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components formats money correctly for the language 2`] = `
+<Component
+  amount={2500.01}
+  customTitle="Toblerone"
+>
+  <SomeTestComponent
+    amount={2500.01}
+    customTitle="Toblerone"
+    kebab-label="Du hast CHF 2’500.01!"
+    message="Eine Schweinshaxe, bitte."
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du hast CHF 2’500.01!
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components handles pluralisation 1`] = `
+<Component
+  numBurgers={0}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Let's eat no burgers today."
+    numBurgers={0}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Let's eat no burgers today.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components handles pluralisation 2`] = `
+<Component
+  numBurgers={1}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Let's eat one burger today."
+    numBurgers={1}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Let's eat one burger today.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components handles pluralisation 3`] = `
+<Component
+  numBurgers={99}
+>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Let's eat 99 burgers today."
+    numBurgers={99}
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Let's eat 99 burgers today.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components passes default \`de_DE\` translated strings to wrapped components 1`] = `
+<Component>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    title="Dies ist ein fester Titel"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Dies ist ein fester Titel
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components passes translated strings alongside default fallbacks to wrapped components 1`] = `
+<Component>
+  <SomeTestComponent
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    title="Good day, Sir."
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      Good day, Sir.
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
+
+exports[`Translate components transforms template params with supplied functions 1`] = `
+<Component
+  interpolated="french"
+>
+  <SomeTestComponent
+    interpolated="french"
+    kebab-label="Du, du hast."
+    message="Eine Schweinshaxe, bitte."
+    title="This is going to be really FRENCH!"
+  >
+    <img
+      width={100}
+    />
+    <h1>
+      This is going to be really FRENCH!
+    </h1>
+    <h2>
+      Du, du hast.
+    </h2>
+    <p>
+      Eine Schweinshaxe, bitte.
+    </p>
+  </SomeTestComponent>
+</Component>
+`;
