@@ -2,6 +2,8 @@ import React from 'react'
 import get from 'lodash.get'
 import merge from 'lodash.merge'
 import isString from 'lodash.isString'
+import memoize from 'lodash.memoize'
+import isPlainObject from 'lodash.isPlainObject'
 import isNumber from 'lodash.isNumber'
 import IntlFormat from 'intl-messageformat'
 
@@ -43,13 +45,14 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
         return false
       }
 
-      buildTranslations = locale => merge(
+      buildTranslations = memoize((locale, translationProps) => merge(
         {},
+        globalTranslations[defaultLocale],
         globalTranslations[locale],
         translations[defaultLocale],
         translations[locale],
-        this.props.translations[locale]
-      )
+        translationProps[locale]
+      ))
 
       getTranslateFunc = locale => {
         const formats = {
@@ -57,24 +60,30 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
           ...format
         }
 
-        const allTranslations = this.buildTranslations(locale)
+        const allTranslations = this.buildTranslations(locale, this.props.translations)
 
-        return function translate (key) {
+        const translateFunc = memoize(key => {
           const value = get(allTranslations, key)
 
+          // Return the formatted string for numbers and strings
           if (isNumber(value) || isString(value)) {
-            const result = new IntlFormat(formats, value, locale)
+            const result = new IntlFormat(value, locale, formats)
             return result.format(this.props)
           }
 
+          // Return another translate function for enum properties
+          if (isPlainObject(value)) return subkey => translateFunc([key, subkey])
+
           return value
-        }
+        })
+
+        return translateFunc
       }
 
       render () {
         return (
           <TranslationConsumer>
-            {locale => <Component translate={this.getTranslateFunc(locale)} />}
+            {locale => <Component translate={this.getTranslateFunc(locale)} {...this.props} />}
           </TranslationConsumer>
         )
       }
