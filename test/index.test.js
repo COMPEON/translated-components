@@ -2,6 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { TranslationProvider, withTranslation } from '../src'
 
+/* eslint-disable-next-line */
 const SomeTestComponent = ({ translate, notToBeTranslated }) => (
   <React.Fragment>
     <img width={notToBeTranslated} />

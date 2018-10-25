@@ -4,7 +4,6 @@ import merge from 'lodash.merge'
 import isString from 'lodash.isstring'
 import kebabCase from 'lodash.kebabcase'
 import isNumber from 'lodash.isnumber'
-import forEach from 'lodash.forEach'
 import memoize from 'lodash.memoize'
 import isPlainObject from 'lodash.isplainobject'
 import IntlFormat from 'intl-messageformat'
@@ -52,10 +51,10 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
 
         const translateFunc = memoize(key => {
           const value = (
-               get(this.props.translations[locale], key)
-            || get(this.props.translations[defaultLocale], key)
-            || get(preHeatedTranslations[locale], key)
-            || get(preHeatedTranslations[defaultLocale], key)
+            get(this.props.translations[locale], key) ||
+            get(this.props.translations[defaultLocale], key) ||
+            get(preHeatedTranslations[locale], key) ||
+            get(preHeatedTranslations[defaultLocale], key)
           )
 
           // Return the formatted string for numbers and strings
