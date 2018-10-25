@@ -2,7 +2,9 @@ import React from 'react'
 import get from 'lodash.get'
 import merge from 'lodash.merge'
 import isString from 'lodash.isstring'
+import kebabCase from 'lodash.kebabcase'
 import isNumber from 'lodash.isnumber'
+import forEach from 'lodash.forEach'
 import memoize from 'lodash.memoize'
 import isPlainObject from 'lodash.isplainobject'
 import IntlFormat from 'intl-messageformat'
@@ -35,39 +37,30 @@ const moneyFormat = locale => ({
 
 const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE) => {
   const withTranslation = ({ translations, format = {} }) => {
+    const preHeatedTranslations = merge({}, globalTranslations, translations)
 
     return Component => class WrappedComponent extends React.Component {
       static defaultProps = {
         translations: {}
       }
 
-      shouldComponentUpdate () {
-        return false
-      }
-
-      buildTranslations = memoize((locale, translationProps) => merge(
-        {},
-        globalTranslations[defaultLocale],
-        globalTranslations[locale],
-        translations[defaultLocale],
-        translations[locale],
-        translationProps[locale]
-      ))
-
-      getTranslateFunc = locale => {
+      getTranslateFunc = (locale = defaultLocale) => {
         const formats = {
           ...moneyFormat(locale),
           ...format
         }
 
-        const allTranslations = this.buildTranslations(locale, this.props.translations)
-
         const translateFunc = memoize(key => {
-          const value = get(allTranslations, key)
+          const value = (
+               get(this.props.translations[locale], key)
+            || get(this.props.translations[defaultLocale], key)
+            || get(preHeatedTranslations[locale], key)
+            || get(preHeatedTranslations[defaultLocale], key)
+          )
 
           // Return the formatted string for numbers and strings
           if (isNumber(value) || isString(value)) {
-            const result = new IntlFormat(value, locale, formats)
+            const result = new IntlFormat(value, kebabCase(locale), formats)
             return result.format(this.props)
           }
 
@@ -81,9 +74,10 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
       }
 
       render () {
+        const { translations, ...props } = this.props
         return (
           <TranslationConsumer>
-            {locale => <Component translate={this.getTranslateFunc(locale)} {...this.props} />}
+            {locale => <Component translate={this.getTranslateFunc(locale)} {...props} />}
           </TranslationConsumer>
         )
       }
