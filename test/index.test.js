@@ -2,33 +2,31 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { TranslationProvider, withTranslation } from '../src'
 
-const SomeTestComponent = ({
-  notToBeTranslated = 100,
-  title = 'a default title',
-  'kebab-label': kebabLabel = 'a default kebab label',
-  message = 'a default message'
-}) => (
+const SomeTestComponent = ({ translate, notToBeTranslated }) => (
   <React.Fragment>
     <img width={notToBeTranslated} />
-    <h1>{title}</h1>
-    <h2>{kebabLabel}</h2>
-    <p>{message}</p>
+    <h1>{translate('title')}</h1>
+    <h2>{translate('kebabLabel')}</h2>
+    <p>{translate('message')}</p>
   </React.Fragment>
 )
 
 const translations = {
   de_DE: {
     title: 'Dies ist ein fester Titel',
-    'kebab-label': 'Du, du hast.',
+    kebabLabel: 'Du, du hast.',
     message: 'Eine Schweinshaxe, bitte.'
   },
   de_AT: {
     title: 'Dies ist ein {customTitle}',
-    'kebab-label': 'Du hast {amount, number, money}!',
+    x: {
+      title: '123'
+    },
+    kebabLabel: 'Du hast {amount, number, money}!',
     message: 'Hier wird nie etwas anderes stehen.'
   },
   de_CH: {
-    'kebab-label': 'Du hast {amount, number, money}!'
+    kebabLabel: 'Du hast {amount, number, money}!'
   },
   en_GB: {
     title: 'Good day, Sir.'
@@ -41,12 +39,8 @@ const translations = {
   }
 }
 
-const params = {
-  interpolated: ({ interpolated = '' }) => `really ${interpolated.toUpperCase()}!`
-}
-
 describe('Translate components', () => {
-  const TranslatedTestComponent = withTranslation({ translations, params })(SomeTestComponent)
+  const TranslatedTestComponent = withTranslation({ translations })(SomeTestComponent)
 
   const subject = ({ locale, ...rest }) => (
     mount(
@@ -55,12 +49,9 @@ describe('Translate components', () => {
       </TranslationProvider>
     )
   )
+
   it('does not touch non-translation props', () => {
     expect(subject({ notToBeTranslated: 99 })).toMatchSnapshot()
-  })
-
-  it('passes default `de_DE` translated strings to wrapped components', () => {
-    expect(subject({})).toMatchSnapshot()
   })
 
   it('passes translated strings alongside default fallbacks to wrapped components', () => {
@@ -76,9 +67,5 @@ describe('Translate components', () => {
     expect(subject({ locale: 'en_US', numBurgers: 0 })).toMatchSnapshot()
     expect(subject({ locale: 'en_US', numBurgers: 1 })).toMatchSnapshot()
     expect(subject({ locale: 'en_US', numBurgers: 99 })).toMatchSnapshot()
-  })
-
-  it('transforms template params with supplied functions', () => {
-    expect(subject({ locale: 'fr_FR', interpolated: 'french' })).toMatchSnapshot()
   })
 })

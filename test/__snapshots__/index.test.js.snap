@@ -1,14 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Translate components does not touch non-translation props 1`] = `
-<Component
+<WrappedComponent
   notToBeTranslated={99}
+  translations={Object {}}
 >
   <SomeTestComponent
-    kebab-label="Du, du hast."
-    message="Eine Schweinshaxe, bitte."
     notToBeTranslated={99}
-    title="Dies ist ein fester Titel"
+    translate={[Function]}
   >
     <img
       width={99}
@@ -23,78 +22,69 @@ exports[`Translate components does not touch non-translation props 1`] = `
       Eine Schweinshaxe, bitte.
     </p>
   </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
 
 exports[`Translate components formats money correctly for the language 1`] = `
-<Component
+<WrappedComponent
   amount={42.37}
   customTitle="Zipfelklatschr"
+  translations={Object {}}
 >
   <SomeTestComponent
     amount={42.37}
     customTitle="Zipfelklatschr"
-    kebab-label="Du hast € 42,37!"
-    message="Hier wird nie etwas anderes stehen."
-    title="Dies ist ein Zipfelklatschr"
+    translate={[Function]}
   >
-    <img
-      width={100}
-    />
+    <img />
     <h1>
       Dies ist ein Zipfelklatschr
     </h1>
     <h2>
-      Du hast € 42,37!
+      Du hast € 42.37!
     </h2>
     <p>
       Hier wird nie etwas anderes stehen.
     </p>
   </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
 
 exports[`Translate components formats money correctly for the language 2`] = `
-<Component
+<WrappedComponent
   amount={2500.01}
   customTitle="Toblerone"
+  translations={Object {}}
 >
   <SomeTestComponent
     amount={2500.01}
     customTitle="Toblerone"
-    kebab-label="Du hast CHF 2’500.01!"
-    message="Eine Schweinshaxe, bitte."
-    title="Dies ist ein fester Titel"
+    translate={[Function]}
   >
-    <img
-      width={100}
-    />
+    <img />
     <h1>
       Dies ist ein fester Titel
     </h1>
     <h2>
-      Du hast CHF 2’500.01!
+      Du hast CHF 2,500.01!
     </h2>
     <p>
       Eine Schweinshaxe, bitte.
     </p>
   </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
 
 exports[`Translate components handles pluralisation 1`] = `
-<Component
+<WrappedComponent
   numBurgers={0}
+  translations={Object {}}
 >
   <SomeTestComponent
-    kebab-label="Du, du hast."
-    message="Let's eat no burgers today."
     numBurgers={0}
-    title="Dies ist ein fester Titel"
+    translate={[Function]}
   >
-    <img
-      width={100}
-    />
+    <img />
     <h1>
       Dies ist ein fester Titel
     </h1>
@@ -105,22 +95,19 @@ exports[`Translate components handles pluralisation 1`] = `
       Let's eat no burgers today.
     </p>
   </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
 
 exports[`Translate components handles pluralisation 2`] = `
-<Component
+<WrappedComponent
   numBurgers={1}
+  translations={Object {}}
 >
   <SomeTestComponent
-    kebab-label="Du, du hast."
-    message="Let's eat one burger today."
     numBurgers={1}
-    title="Dies ist ein fester Titel"
+    translate={[Function]}
   >
-    <img
-      width={100}
-    />
+    <img />
     <h1>
       Dies ist ein fester Titel
     </h1>
@@ -131,22 +118,19 @@ exports[`Translate components handles pluralisation 2`] = `
       Let's eat one burger today.
     </p>
   </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
 
 exports[`Translate components handles pluralisation 3`] = `
-<Component
+<WrappedComponent
   numBurgers={99}
+  translations={Object {}}
 >
   <SomeTestComponent
-    kebab-label="Du, du hast."
-    message="Let's eat 99 burgers today."
     numBurgers={99}
-    title="Dies ist ein fester Titel"
+    translate={[Function]}
   >
-    <img
-      width={100}
-    />
+    <img />
     <h1>
       Dies ist ein fester Titel
     </h1>
@@ -157,42 +141,17 @@ exports[`Translate components handles pluralisation 3`] = `
       Let's eat 99 burgers today.
     </p>
   </SomeTestComponent>
-</Component>
-`;
-
-exports[`Translate components passes default \`de_DE\` translated strings to wrapped components 1`] = `
-<Component>
-  <SomeTestComponent
-    kebab-label="Du, du hast."
-    message="Eine Schweinshaxe, bitte."
-    title="Dies ist ein fester Titel"
-  >
-    <img
-      width={100}
-    />
-    <h1>
-      Dies ist ein fester Titel
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
-      Eine Schweinshaxe, bitte.
-    </p>
-  </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
 
 exports[`Translate components passes translated strings alongside default fallbacks to wrapped components 1`] = `
-<Component>
+<WrappedComponent
+  translations={Object {}}
+>
   <SomeTestComponent
-    kebab-label="Du, du hast."
-    message="Eine Schweinshaxe, bitte."
-    title="Good day, Sir."
+    translate={[Function]}
   >
-    <img
-      width={100}
-    />
+    <img />
     <h1>
       Good day, Sir.
     </h1>
@@ -203,31 +162,5 @@ exports[`Translate components passes translated strings alongside default fallba
       Eine Schweinshaxe, bitte.
     </p>
   </SomeTestComponent>
-</Component>
-`;
-
-exports[`Translate components transforms template params with supplied functions 1`] = `
-<Component
-  interpolated="french"
->
-  <SomeTestComponent
-    interpolated="french"
-    kebab-label="Du, du hast."
-    message="Eine Schweinshaxe, bitte."
-    title="This is going to be really FRENCH!"
-  >
-    <img
-      width={100}
-    />
-    <h1>
-      This is going to be really FRENCH!
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
-      Eine Schweinshaxe, bitte.
-    </p>
-  </SomeTestComponent>
-</Component>
+</WrappedComponent>
 `;
