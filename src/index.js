@@ -1,10 +1,10 @@
 import React from 'react'
 import get from 'lodash.get'
 import merge from 'lodash.merge'
-import isString from 'lodash.isString'
+import isString from 'lodash.isstring'
+import isNumber from 'lodash.isnumber'
 import memoize from 'lodash.memoize'
-import isPlainObject from 'lodash.isPlainObject'
-import isNumber from 'lodash.isNumber'
+import isPlainObject from 'lodash.isplainobject'
 import IntlFormat from 'intl-messageformat'
 
 const DEFAULT_LOCALE = 'de_DE'
