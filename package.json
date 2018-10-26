@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "rollup -c"
   },
   "dependencies": {
     "intl-messageformat": "^2.2.0",
@@ -44,7 +45,9 @@
     "eslint-plugin-standard": "^4.0.0",
     "icu4c-data": "62l",
     "jest": "^23.6.0",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/test/setup/enzyme.js",
