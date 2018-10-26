@@ -52,9 +52,10 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
         const translateFunc = key => {
           const value = (
             get(propsTranslations[locale], key) ||
-            get(propsTranslations[defaultLocale], key) ||
             get(preHeatedTranslations[locale], key) ||
-            get(preHeatedTranslations[defaultLocale], key)
+            get(propsTranslations[defaultLocale], key) ||
+            get(preHeatedTranslations[defaultLocale], key) ||
+            key
           )
 
           // Return the formatted string for numbers and strings

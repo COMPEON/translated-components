@@ -1,16 +1,17 @@
+/* eslint-disable */
 import React from 'react'
 import { mount } from 'enzyme'
-import { TranslationProvider, withTranslation } from '../src'
+import { TranslationProvider, createWithTranslation } from '../src'
 
-/* eslint-disable-next-line */
-const SomeTestComponent = ({ translate, notToBeTranslated }) => (
-  <React.Fragment>
-    <img width={notToBeTranslated} />
-    <h1>{translate('title')}</h1>
-    <h2>{translate('kebabLabel')}</h2>
-    <p>{translate('message')}</p>
-  </React.Fragment>
-)
+const globalTranslations = {
+  de_DE: {
+    inquiry: 'Anfrage',
+    productKinds: {
+      overdraft: 'Überentwurf'
+    }
+  }
+}
+
 
 const translations = {
   de_DE: {
@@ -41,32 +42,67 @@ const translations = {
 }
 
 describe('Translate components', () => {
-  const TranslatedTestComponent = withTranslation({ translations })(SomeTestComponent)
+  const withTranslation = createWithTranslation(globalTranslations)
 
-  const subject = ({ locale, ...rest }) => (
-    mount(
+  const subject = (Component, { locale, ...rest }) => {
+    const WrappedComponent = withTranslation({ translations })(Component)
+
+    return mount(
       <TranslationProvider value={locale}>
-        <TranslatedTestComponent {...rest} />
+        <WrappedComponent {...rest} />
       </TranslationProvider>
     )
-  )
+  }
 
   it('does not touch non-translation props', () => {
-    expect(subject({ notToBeTranslated: 99 })).toMatchSnapshot()
+    const Component = ({ notToBeTranslated }) => <span>{notToBeTranslated}</span>
+    expect(subject(Component, { locale: 'de_DE', notToBeTranslated: 99 })).toMatchSnapshot()
   })
 
-  it('passes translated strings alongside default fallbacks to wrapped components', () => {
-    expect(subject({ locale: 'en_GB' })).toMatchSnapshot()
+  it('translates values using the locale', () => {
+    const Component = ({ translate }) => <span>{translate('title')}</span>
+    expect(subject(Component, { locale: 'en_GB' })).toMatchSnapshot()
+  })
+
+  it('uses a translation from the translation props', () => {
+    const Component = ({ translate }) => <span>{translate('title')}</span>
+    expect(subject(Component, {
+      locale: 'en_GB',
+      translations: { en_GB: { title: 'Proper title' } }
+    })).toMatchSnapshot()
+  })
+
+  it('falls back to the global translations', () => {
+    const Component = ({ translate }) => <span>{translate('inquiry')}</span>
+    expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
+  })
+
+  it('uses the key when no translation is found', () => {
+    const Component = ({ translate }) => <span>{translate('blaBlubb')}</span>
+    expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
+  })
+
+  it('allows for translation of enum values', () => {
+    const Component = ({ translate }) => {
+      const translateProduct = translate('productKinds')
+      return <span>{translateProduct('overdraft')}</span>
+    }
+
+    expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
   })
 
   it('formats money correctly for the language', () => {
-    expect(subject({ locale: 'de_AT', customTitle: 'Zipfelklatschr', amount: 42.37 })).toMatchSnapshot()
-    expect(subject({ locale: 'de_CH', customTitle: 'Toblerone', amount: 2500.01 })).toMatchSnapshot()
+    const Component = ({ translate }) => <span>{translate('kebabLabel')}</span>
+
+    expect(subject(Component, { locale: 'de_AT', amount: 42.37 })).toMatchSnapshot()
+    expect(subject(Component, { locale: 'de_CH', amount: 2500.01 })).toMatchSnapshot()
   })
 
   it('handles pluralisation', () => {
-    expect(subject({ locale: 'en_US', numBurgers: 0 })).toMatchSnapshot()
-    expect(subject({ locale: 'en_US', numBurgers: 1 })).toMatchSnapshot()
-    expect(subject({ locale: 'en_US', numBurgers: 99 })).toMatchSnapshot()
+    const Component = ({ translate }) => <span>{translate('message')}</span>
+
+    expect(subject(Component, { locale: 'en_US', numBurgers: 0 })).toMatchSnapshot()
+    expect(subject(Component, { locale: 'en_US', numBurgers: 1 })).toMatchSnapshot()
+    expect(subject(Component, { locale: 'en_US', numBurgers: 99 })).toMatchSnapshot()
   })
 })

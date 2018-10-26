@@ -1,77 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Translate components allows for translation of enum values 1`] = `
+<WrappedComponent
+  translations={Object {}}
+>
+  <Component
+    translate={[Function]}
+  >
+    <span>
+      Überentwurf
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
 exports[`Translate components does not touch non-translation props 1`] = `
 <WrappedComponent
   notToBeTranslated={99}
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     notToBeTranslated={99}
     translate={[Function]}
   >
-    <img
-      width={99}
-    />
-    <h1>
-      Dies ist ein fester Titel
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
-      Eine Schweinshaxe, bitte.
-    </p>
-  </SomeTestComponent>
+    <span>
+      99
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
+exports[`Translate components falls back to the global translations 1`] = `
+<WrappedComponent
+  translations={Object {}}
+>
+  <Component
+    translate={[Function]}
+  >
+    <span>
+      Anfrage
+    </span>
+  </Component>
 </WrappedComponent>
 `;
 
 exports[`Translate components formats money correctly for the language 1`] = `
 <WrappedComponent
   amount={42.37}
-  customTitle="Zipfelklatschr"
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     amount={42.37}
-    customTitle="Zipfelklatschr"
     translate={[Function]}
   >
-    <img />
-    <h1>
-      Dies ist ein Zipfelklatschr
-    </h1>
-    <h2>
+    <span>
       Du hast € 42.37!
-    </h2>
-    <p>
-      Hier wird nie etwas anderes stehen.
-    </p>
-  </SomeTestComponent>
+    </span>
+  </Component>
 </WrappedComponent>
 `;
 
 exports[`Translate components formats money correctly for the language 2`] = `
 <WrappedComponent
   amount={2500.01}
-  customTitle="Toblerone"
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     amount={2500.01}
-    customTitle="Toblerone"
     translate={[Function]}
   >
-    <img />
-    <h1>
-      Dies ist ein fester Titel
-    </h1>
-    <h2>
+    <span>
       Du hast CHF 2,500.01!
-    </h2>
-    <p>
-      Eine Schweinshaxe, bitte.
-    </p>
-  </SomeTestComponent>
+    </span>
+  </Component>
 </WrappedComponent>
 `;
 
@@ -80,21 +81,14 @@ exports[`Translate components handles pluralisation 1`] = `
   numBurgers={0}
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     numBurgers={0}
     translate={[Function]}
   >
-    <img />
-    <h1>
-      Dies ist ein fester Titel
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
+    <span>
       Let's eat no burgers today.
-    </p>
-  </SomeTestComponent>
+    </span>
+  </Component>
 </WrappedComponent>
 `;
 
@@ -103,21 +97,14 @@ exports[`Translate components handles pluralisation 2`] = `
   numBurgers={1}
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     numBurgers={1}
     translate={[Function]}
   >
-    <img />
-    <h1>
-      Dies ist ein fester Titel
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
+    <span>
       Let's eat one burger today.
-    </p>
-  </SomeTestComponent>
+    </span>
+  </Component>
 </WrappedComponent>
 `;
 
@@ -126,41 +113,61 @@ exports[`Translate components handles pluralisation 3`] = `
   numBurgers={99}
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     numBurgers={99}
     translate={[Function]}
   >
-    <img />
-    <h1>
-      Dies ist ein fester Titel
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
+    <span>
       Let's eat 99 burgers today.
-    </p>
-  </SomeTestComponent>
+    </span>
+  </Component>
 </WrappedComponent>
 `;
 
-exports[`Translate components passes translated strings alongside default fallbacks to wrapped components 1`] = `
+exports[`Translate components translates values using the locale 1`] = `
 <WrappedComponent
   translations={Object {}}
 >
-  <SomeTestComponent
+  <Component
     translate={[Function]}
   >
-    <img />
-    <h1>
+    <span>
       Good day, Sir.
-    </h1>
-    <h2>
-      Du, du hast.
-    </h2>
-    <p>
-      Eine Schweinshaxe, bitte.
-    </p>
-  </SomeTestComponent>
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
+exports[`Translate components uses a translation from the translation props 1`] = `
+<WrappedComponent
+  translations={
+    Object {
+      "en_GB": Object {
+        "title": "Proper title",
+      },
+    }
+  }
+>
+  <Component
+    translate={[Function]}
+  >
+    <span>
+      Proper title
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
+exports[`Translate components uses the key when no translation is found 1`] = `
+<WrappedComponent
+  translations={Object {}}
+>
+  <Component
+    translate={[Function]}
+  >
+    <span>
+      blaBlubb
+    </span>
+  </Component>
 </WrappedComponent>
 `;
