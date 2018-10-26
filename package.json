@@ -1,12 +1,19 @@
 {
-  "name": "translated-components",
-  "version": "0.1.0",
+  "name": "@compeon/translated-components",
+  "version": "0.0.1",
   "description": "Applies the component thinking to i18n",
-  "main": "index.js",
+  "main": "dist/translated-components.umd.js",
+  "module": "dist/translated-components.es.js",
   "repository": "git@github.com:COMPEON/translated-components.git",
-  "author": "Lars Greiving <lgreiving@compeon.de>",
+  "authors": [
+    "Lars Greiving <lgreiving@compeon.de>",
+    "Bastian Ahrens <bahrens@compeon.de>"
+  ],
   "license": "MIT",
   "private": false,
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
@@ -22,7 +29,6 @@
     "lodash.kebabcase": "^4.1.1",
     "lodash.memoize": "^4.1.2",
     "lodash.merge": "^4.6.1",
-    "lodash.transform": "^4.6.0",
     "react": "^16.5.2"
   },
   "devDependencies": {
