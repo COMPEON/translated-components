@@ -43,16 +43,16 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
         translations: {}
       }
 
-      getTranslateFunc = (locale = defaultLocale) => {
+      getTranslateFunc = memoize((locale = defaultLocale, propsTranslations) => {
         const formats = {
           ...moneyFormat(locale),
           ...format
         }
 
-        const translateFunc = memoize(key => {
+        const translateFunc = key => {
           const value = (
-            get(this.props.translations[locale], key) ||
-            get(this.props.translations[defaultLocale], key) ||
+            get(propsTranslations[locale], key) ||
+            get(propsTranslations[defaultLocale], key) ||
             get(preHeatedTranslations[locale], key) ||
             get(preHeatedTranslations[defaultLocale], key)
           )
@@ -67,16 +67,16 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
           if (isPlainObject(value)) return subkey => translateFunc([key, subkey])
 
           return value
-        })
+        }
 
         return translateFunc
-      }
+      })
 
       render () {
         const { translations, ...props } = this.props
         return (
           <TranslationConsumer>
-            {locale => <Component translate={this.getTranslateFunc(locale)} {...props} />}
+            {locale => <Component translate={this.getTranslateFunc(locale, translations)} {...props} />}
           </TranslationConsumer>
         )
       }
