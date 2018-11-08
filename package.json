@@ -17,7 +17,7 @@
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
-    "lint": "eslint .",
+    "lint": "eslint src",
     "build": "rollup -c"
   },
   "dependencies": {
