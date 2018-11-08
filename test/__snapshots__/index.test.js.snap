@@ -54,7 +54,7 @@ exports[`Translate components formats money correctly for the language 1`] = `
     translate={[Function]}
   >
     <span>
-      Du hast € 42.37!
+      Du hast € 42,37!
     </span>
   </Component>
 </WrappedComponent>
@@ -70,7 +70,7 @@ exports[`Translate components formats money correctly for the language 2`] = `
     translate={[Function]}
   >
     <span>
-      Du hast CHF 2,500.01!
+      Du hast CHF 2’500.01!
     </span>
   </Component>
 </WrappedComponent>
