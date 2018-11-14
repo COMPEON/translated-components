@@ -38,48 +38,60 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
   const withTranslation = ({ translations, format = {} }) => {
     const preHeatedTranslations = merge({}, globalTranslations, translations)
 
-    return Component => class WrappedComponent extends React.Component {
-      static defaultProps = {
-        translations: {}
-      }
+    return Component => {
+      const displayName = Component.displayName || Component.name || 'Component'
 
-      getTranslateFunc = memoize((locale = defaultLocale, propsTranslations) => {
-        const formats = {
-          ...moneyFormat(locale),
-          ...format
+      return class WrappedComponent extends React.Component {
+        static defaultProps = {
+          translations: {}
         }
 
-        const translateFunc = key => {
-          const value = (
-            get(propsTranslations[locale], key) ||
-            get(preHeatedTranslations[locale], key) ||
-            get(propsTranslations[defaultLocale], key) ||
-            get(preHeatedTranslations[defaultLocale], key) ||
-            key
-          )
-
-          // Return the formatted string for numbers and strings
-          if (isNumber(value) || isString(value)) {
-            const result = new IntlFormat(value, kebabCase(locale), formats)
-            return result.format(this.props)
+        warnAboutMissingTranslation = key => {
+          if (process.env.NODE_ENV !== 'production') {
+            console.warn(`${displayName}: Key "${key}" was not found. Falling back to the key as translation`)
           }
 
-          // Return another translate function for enum properties
-          if (isPlainObject(value)) return subkey => translateFunc([key, subkey])
-
-          return value
+          return key
         }
 
-        return translateFunc
-      })
+        getTranslateFunc = memoize((locale = defaultLocale, propsTranslations) => {
+          const formats = {
+            ...moneyFormat(locale),
+            ...format
+          }
 
-      render () {
-        const { translations, ...props } = this.props
-        return (
-          <TranslationConsumer>
-            {locale => <Component translate={this.getTranslateFunc(locale, translations)} {...props} />}
-          </TranslationConsumer>
-        )
+          const translateFunc = key => {
+            const value = (
+              get(propsTranslations[locale], key) ||
+              get(preHeatedTranslations[locale], key) ||
+              get(propsTranslations[defaultLocale], key) ||
+              get(preHeatedTranslations[defaultLocale], key) ||
+              this.warnAboutMissingTranslation(key)
+            )
+
+            // Return the formatted string for numbers and strings
+            if (isNumber(value) || isString(value)) {
+              const result = new IntlFormat(value, kebabCase(locale), formats)
+              return result.format(this.props)
+            }
+
+            // Return another translate function for enum properties
+            if (isPlainObject(value)) return subkey => translateFunc([key, subkey])
+
+            return value
+          }
+
+          return translateFunc
+        })
+
+        render () {
+          const { translations, ...props } = this.props
+          return (
+            <TranslationConsumer>
+              {locale => <Component translate={this.getTranslateFunc(locale, translations)} {...props} />}
+            </TranslationConsumer>
+          )
+        }
       }
     }
   }

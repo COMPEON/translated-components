@@ -77,9 +77,14 @@ describe('Translate components', () => {
     expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
   })
 
-  it('uses the key when no translation is found', () => {
+  it('uses the key when no translation is found and warns about it', () => {
     const Component = ({ translate }) => <span>{translate('blaBlubb')}</span>
+    const warn = jest.spyOn(global.console, 'warn')
+
     expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
+    expect(warn).toHaveBeenCalledWith(
+      'Component: Key "blaBlubb" was not found. Falling back to the key as translation'
+    )
   })
 
   it('allows for translation of enum values', () => {

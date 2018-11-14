@@ -158,7 +158,7 @@ exports[`Translate components uses a translation from the translation props 1`] 
 </WrappedComponent>
 `;
 
-exports[`Translate components uses the key when no translation is found 1`] = `
+exports[`Translate components uses the key when no translation is found and warns about it 1`] = `
 <WrappedComponent
   translations={Object {}}
 >
