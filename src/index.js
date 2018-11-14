@@ -35,7 +35,7 @@ const moneyFormat = locale => ({
 })
 
 const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE) => {
-  const withTranslation = ({ translations, format = {} }) => {
+  const withTranslation = ({ translations, format = {} } = {}) => {
     const preHeatedTranslations = merge({}, globalTranslations, translations)
 
     return Component => {
