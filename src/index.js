@@ -39,7 +39,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
     const preHeatedTranslations = merge({}, globalTranslations, translations)
 
     return Component => {
-      const displayName = Component.displayName || Component.name || 'Component'
+      const displayName = Component.displayName || Component.name || 'withTranslation(Component)'
 
       return class WrappedComponent extends React.Component {
         static defaultProps = {
@@ -54,7 +54,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
           return key
         }
 
-        getTranslateFunc = memoize((locale = defaultLocale, propsTranslations) => {
+        getTranslateFunc = memoize((propsTranslations, locale = defaultLocale) => {
           const formats = {
             ...moneyFormat(locale),
             ...format
@@ -86,9 +86,12 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
 
         render () {
           const { translations, ...props } = this.props
+
           return (
             <TranslationConsumer>
-              {locale => <Component translate={this.getTranslateFunc(locale, translations)} {...props} />}
+              {locale => (
+                <Component translate={this.getTranslateFunc(this.props.translations, locale)} {...props} />
+              )}
             </TranslationConsumer>
           )
         }
