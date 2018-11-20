@@ -1,11 +1,19 @@
 import React from 'react'
-import kebabCase from 'lodash.kebabcase'
-import transform from 'lodash.transform'
+import get from 'lodash.get'
+import merge from 'lodash.merge'
 import isString from 'lodash.isstring'
+import kebabCase from 'lodash.kebabcase'
 import isNumber from 'lodash.isnumber'
+import memoize from 'lodash.memoize'
+import isPlainObject from 'lodash.isplainobject'
 import IntlFormat from 'intl-messageformat'
 
 const DEFAULT_LOCALE = 'de_DE'
+
+const {
+  Provider: TranslationProvider,
+  Consumer: TranslationConsumer
+} = React.createContext(DEFAULT_LOCALE)
 
 const CURRENCY_BY_REGION = {
   AT: 'EUR',
@@ -14,38 +22,6 @@ const CURRENCY_BY_REGION = {
   FR: 'EUR',
   GB: 'GPB',
   US: 'USD'
-}
-
-const passThrough = value => value
-
-const {
-  Provider: TranslationProvider,
-  Consumer: TranslationConsumer
-} = React.createContext(DEFAULT_LOCALE)
-
-const withTranslation = ({ translations, params = {}, mapTranslationsToProps = passThrough, format = {} }) => {
-  const initializedTranslations = initializeTranslations(translations, format)
-
-  const wrapComponent = Component => props => {
-    const translationsForLocale = locale => translateWithDefaults({
-      translations: initializedTranslations,
-      locale: locale || DEFAULT_LOCALE,
-      reducer: templateReducer(applyParamFunctions(props, params))
-    })
-
-    return (
-      <TranslationConsumer>
-        { locale =>
-          <Component
-            {...props}
-            {...mapTranslationsToProps(translationsForLocale(locale), props)}
-          />
-        }
-      </TranslationConsumer>
-    )
-  }
-
-  return wrapComponent
 }
 
 const moneyFormat = locale => ({
@@ -58,40 +34,78 @@ const moneyFormat = locale => ({
   }
 })
 
-const applyIntlToTranslations = (translations, locale, format) => (
-  transform(translations, (result, entry, key) => {
-    result[key] = new IntlFormat(entry, kebabCase(locale), { ...moneyFormat(locale), ...format })
-  })
-)
+const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE) => {
+  const withTranslation = ({ translations, format = {} } = {}) => {
+    const preHeatedTranslations = merge({}, globalTranslations, translations)
 
-const initializeTranslations = (translations, format) => (
-  transform(translations, (result, localeTranslations, locale) => {
-    result[locale] = applyIntlToTranslations(localeTranslations, locale, format)
-  })
-)
+    return Component => {
+      const displayName = Component.displayName || Component.name || 'withTranslation(Component)'
 
-const templateReducer = (values) => (result, v, k) => {
-  result[k] = v.format(values)
-  return result
+      return class WrappedComponent extends React.Component {
+        static defaultProps = {
+          translations: {}
+        }
+
+        warnAboutMissingTranslation = key => {
+          if (process.env.NODE_ENV !== 'production') {
+            console.warn(`${displayName}: Key "${key}" was not found. Falling back to the key as translation`)
+          }
+
+          return key
+        }
+
+        getTranslateFunc = memoize((propsTranslations, locale = defaultLocale) => {
+          const formats = {
+            ...moneyFormat(locale),
+            ...format
+          }
+
+          const translateFunc = key => {
+            const value = (
+              get(propsTranslations[locale], key) ||
+              get(preHeatedTranslations[locale], key) ||
+              get(propsTranslations[defaultLocale], key) ||
+              get(preHeatedTranslations[defaultLocale], key) ||
+              this.warnAboutMissingTranslation(key)
+            )
+
+            // Return the formatted string for numbers and strings
+            if (isNumber(value) || isString(value)) {
+              const result = new IntlFormat(value, kebabCase(locale), formats)
+              return result.format(this.props)
+            }
+
+            // Return another translate function for enum properties
+            if (isPlainObject(value)) return subkey => translateFunc([key, subkey])
+
+            return value
+          }
+
+          return translateFunc
+        })
+
+        render () {
+          const { translations, ...props } = this.props
+
+          return (
+            <TranslationConsumer>
+              {locale => (
+                <Component translate={this.getTranslateFunc(this.props.translations, locale)} {...props} />
+              )}
+            </TranslationConsumer>
+          )
+        }
+      }
+    }
+  }
+
+  return withTranslation
 }
 
-const cleanParams = params => (
-  transform(params, (result, v, k) => {
-    if (isString(v) || isNumber(v)) result[k] = v
-  })
-)
+const withTranslation = createWithTranslation({})
 
-const applyParamFunctions = (props, params) => (
-  transform(params, (result, fn, k) => {
-    result[k] = fn(props)
-  }, cleanParams(props))
-)
-
-const translateWithDefaults = ({ locale, reducer, translations = {} }) => (
-  transform({
-    ...translations[DEFAULT_LOCALE],
-    ...translations[locale]
-  }, reducer)
-)
-
-export { TranslationProvider, withTranslation }
+export {
+  TranslationProvider,
+  withTranslation,
+  createWithTranslation
+}

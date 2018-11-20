@@ -1,30 +1,43 @@
 {
-  "name": "translated-components",
-  "version": "0.1.0",
+  "name": "@compeon/translated-components",
+  "version": "0.0.3",
   "description": "Applies the component thinking to i18n",
-  "main": "index.js",
+  "main": "dist/translated-components.umd.js",
+  "module": "dist/translated-components.es.js",
   "repository": "git@github.com:COMPEON/translated-components.git",
-  "author": "Lars Greiving <lgreiving@compeon.de>",
+  "authors": [
+    "Lars Greiving <lgreiving@compeon.de>",
+    "Bastian Ahrens <bahrens@compeon.de>"
+  ],
   "license": "MIT",
   "private": false,
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
-    "lint": "eslint ."
+    "lint": "eslint src",
+    "build": "rollup -c"
   },
   "dependencies": {
     "intl-messageformat": "^2.2.0",
+    "lodash.get": "^4.4.2",
     "lodash.isnumber": "^3.0.3",
+    "lodash.isplainobject": "^4.0.6",
     "lodash.isstring": "^4.0.1",
     "lodash.kebabcase": "^4.1.1",
-    "lodash.transform": "^4.6.0",
+    "lodash.memoize": "^4.1.2",
+    "lodash.merge": "^4.6.1",
     "react": "^16.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
@@ -38,7 +51,9 @@
     "eslint-plugin-standard": "^4.0.0",
     "icu4c-data": "62l",
     "jest": "^23.6.0",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/test/setup/enzyme.js",
