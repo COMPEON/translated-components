@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Translate components allows for disabling key fallback per translation through options 1`] = `
+<WrappedComponent
+  translations={Object {}}
+>
+  <Component
+    translate={[Function]}
+  >
+    <span />
+  </Component>
+</WrappedComponent>
+`;
+
 exports[`Translate components allows for overwriting prop values by passing options to translate 1`] = `
 <WrappedComponent
   interpolated="Kurt"

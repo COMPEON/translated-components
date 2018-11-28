@@ -116,4 +116,10 @@ describe('Translate components', () => {
 
     expect(subject(Component, { locale: 'fr_FR', interpolated: 'Kurt'  })).toMatchSnapshot()
   })
+
+  it('allows for disabling key fallback per translation through options', () => {
+    const Component = ({ translate }) => <span>{translate('carsten.kurt.maschmüller', { fallbackToKey: false })}</span>
+
+    expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
+  })
 })
