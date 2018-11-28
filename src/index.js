@@ -51,7 +51,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
             console.warn(`${displayName}: Key "${key}" was not found. Falling back to the key as translation`)
           }
 
-          return key
+          return key.split('.').pop()
         }
 
         getTranslateFunc = memoize((propsTranslations, locale = defaultLocale) => {
