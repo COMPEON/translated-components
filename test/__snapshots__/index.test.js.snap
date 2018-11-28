@@ -182,7 +182,7 @@ exports[`Translate components uses the key when no translation is found and warn
     translate={[Function]}
   >
     <span>
-      blaBlubb
+      maschmüller
     </span>
   </Component>
 </WrappedComponent>
