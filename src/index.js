@@ -60,7 +60,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
             ...format
           }
 
-          const translateFunc = key => {
+          const translateFunc = (key, translateOptions) => {
             const value = (
               get(propsTranslations[locale], key) ||
               get(preHeatedTranslations[locale], key) ||
@@ -72,11 +72,11 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
             // Return the formatted string for numbers and strings
             if (isNumber(value) || isString(value)) {
               const result = new IntlFormat(value, kebabCase(locale), formats)
-              return result.format(this.props)
+              return result.format({ ...this.props, ...translateOptions })
             }
 
             // Return another translate function for enum properties
-            if (isPlainObject(value)) return subkey => translateFunc([key, subkey])
+            if (isPlainObject(value)) return subkey => translateFunc([key, subkey], translateOptions)
 
             return value
           }

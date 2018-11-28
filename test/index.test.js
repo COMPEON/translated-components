@@ -110,4 +110,10 @@ describe('Translate components', () => {
     expect(subject(Component, { locale: 'en_US', numBurgers: 1 })).toMatchSnapshot()
     expect(subject(Component, { locale: 'en_US', numBurgers: 99 })).toMatchSnapshot()
   })
+
+  it('allows for overwriting prop values by passing options to translate', () => {
+    const Component = ({ translate }) => <span>{translate('title', { interpolated: 'Maschmüller' })}</span>
+
+    expect(subject(Component, { locale: 'fr_FR', interpolated: 'Kurt'  })).toMatchSnapshot()
+  })
 })

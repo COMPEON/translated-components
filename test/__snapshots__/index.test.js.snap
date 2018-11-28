@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Translate components allows for overwriting prop values by passing options to translate 1`] = `
+<WrappedComponent
+  interpolated="Kurt"
+  translations={Object {}}
+>
+  <Component
+    interpolated="Kurt"
+    translate={[Function]}
+  >
+    <span>
+      This is going to be Maschmüller
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
 exports[`Translate components allows for translation of enum values 1`] = `
 <WrappedComponent
   translations={Object {}}
