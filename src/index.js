@@ -34,6 +34,10 @@ const moneyFormat = locale => ({
   }
 })
 
+const defaultOptions = {
+  fallbackToKey: true
+}
+
 const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE) => {
   const withTranslation = ({ translations, format = {} } = {}) => {
     const preHeatedTranslations = merge({}, globalTranslations, translations)
@@ -61,22 +65,27 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
           }
 
           const translateFunc = (key, translateOptions) => {
+            const options = {
+              ...defaultOptions,
+              ...translateOptions
+            }
+
             const value = (
               get(propsTranslations[locale], key) ||
               get(preHeatedTranslations[locale], key) ||
               get(propsTranslations[defaultLocale], key) ||
               get(preHeatedTranslations[defaultLocale], key) ||
-              this.warnAboutMissingTranslation(key)
+              (options.fallbackToKey ? this.warnAboutMissingTranslation(key) : null)
             )
 
             // Return the formatted string for numbers and strings
             if (isNumber(value) || isString(value)) {
               const result = new IntlFormat(value, kebabCase(locale), formats)
-              return result.format({ ...this.props, ...translateOptions })
+              return result.format({ ...this.props, ...options })
             }
 
             // Return another translate function for enum properties
-            if (isPlainObject(value)) return subkey => translateFunc([key, subkey], translateOptions)
+            if (isPlainObject(value)) return subkey => translateFunc([key, subkey], options)
 
             return value
           }
