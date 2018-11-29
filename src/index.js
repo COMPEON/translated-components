@@ -64,7 +64,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
             ...format
           }
 
-          const translateFunc = (key, translateOptions = {}) => {
+          const translateFunc = (key, translateOptions) => {
             const options = {
               ...defaultOptions,
               ...translateOptions
