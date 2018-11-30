@@ -17,7 +17,14 @@ const translations = {
   de_DE: {
     title: 'Dies ist ein fester Titel',
     kebabLabel: 'Du, du hast.',
-    message: 'Eine Schweinshaxe, bitte.'
+    message: 'Eine Schweinshaxe, bitte.',
+    a: {
+      deeply: {
+        nested: {
+          maschmüller: 'karl'
+        }
+      }
+    }
   },
   de_AT: {
     title: 'Dies ist ein {customTitle}',
@@ -44,8 +51,8 @@ const translations = {
 describe('Translate components', () => {
   const withTranslation = createWithTranslation(globalTranslations)
 
-  const subject = (Component, { locale, ...rest }) => {
-    const WrappedComponent = withTranslation({ translations })(Component)
+  const subject = (Component, { locale, scope, ...rest }) => {
+    const WrappedComponent = withTranslation({ translations, scope })(Component)
 
     return mount(
       <TranslationProvider value={locale}>
@@ -121,5 +128,12 @@ describe('Translate components', () => {
     const Component = ({ translate }) => <span>{translate('carsten.kurt.maschmüller', { fallbackToKey: false })}</span>
 
     expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
+  })
+
+  it('allows for setting a scope in withTranslation', () => {
+    const Component = ({ translate }) => <span>{translate('maschmüller')}</span>
+
+    expect(subject(Component, { locale: 'de_DE', scope: 'a.deeply.nested' })).toMatchSnapshot()
+
   })
 })

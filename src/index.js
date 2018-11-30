@@ -39,7 +39,7 @@ const defaultOptions = {
 }
 
 const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE) => {
-  const withTranslation = ({ translations, format = {} } = {}) => {
+  const withTranslation = ({ translations, format = {}, scope = null } = {}) => {
     const preHeatedTranslations = merge({}, globalTranslations, translations)
 
     return Component => {
@@ -65,17 +65,21 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
           }
 
           const translateFunc = (key, translateOptions) => {
+            const scopedKey = `${scope}.${key}`
+
+            const lookupKey = scope ? scopedKey : key
+
             const options = {
               ...defaultOptions,
               ...translateOptions
             }
 
             const value = (
-              get(propsTranslations[locale], key) ||
-              get(preHeatedTranslations[locale], key) ||
-              get(propsTranslations[defaultLocale], key) ||
-              get(preHeatedTranslations[defaultLocale], key) ||
-              (options.fallbackToKey ? this.warnAboutMissingTranslation(key) : null)
+              get(propsTranslations[locale], lookupKey) ||
+              get(preHeatedTranslations[locale], lookupKey) ||
+              get(propsTranslations[defaultLocale], lookupKey) ||
+              get(preHeatedTranslations[defaultLocale], lookupKey) ||
+              (options.fallbackToKey ? this.warnAboutMissingTranslation(lookupKey) : null)
             )
 
             // Return the formatted string for numbers and strings
