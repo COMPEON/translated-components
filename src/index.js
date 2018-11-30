@@ -65,9 +65,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
           }
 
           const translateFunc = (key, translateOptions) => {
-            const scopedKey = `${scope}.${key}`
-
-            const lookupKey = scope ? scopedKey : key
+            const lookupKey = scope ? `${scope}.${key}` : key
 
             const options = {
               ...defaultOptions,
