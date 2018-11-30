@@ -85,7 +85,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
             }
 
             // Return another translate function for enum properties
-            if (isPlainObject(value)) return subkey => translateFunc([key, subkey], options)
+            if (isPlainObject(value)) return subkey => translateFunc(`${key}.${subkey}`, options)
 
             return value
           }
