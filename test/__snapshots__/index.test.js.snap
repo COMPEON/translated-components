@@ -28,6 +28,20 @@ exports[`Translate components allows for overwriting prop values by passing opti
 </WrappedComponent>
 `;
 
+exports[`Translate components allows for setting a scope in withTranslation 1`] = `
+<WrappedComponent
+  translations={Object {}}
+>
+  <Component
+    translate={[Function]}
+  >
+    <span>
+      karl
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
 exports[`Translate components allows for translation of enum values 1`] = `
 <WrappedComponent
   translations={Object {}}
