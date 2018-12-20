@@ -10,6 +10,10 @@ import IntlFormat from 'intl-messageformat'
 
 const DEFAULT_LOCALE = 'de_DE'
 
+const defaultOptions = {
+  fallbackToKey: true
+}
+
 const {
   Provider: TranslationProvider,
   Consumer: TranslationConsumer
@@ -24,7 +28,7 @@ const CURRENCY_BY_REGION = {
   US: 'USD'
 }
 
-const moneyFormat = locale => ({
+const getMoneyFormat = locale => ({
   number: {
     money: {
       currency: CURRENCY_BY_REGION[locale.slice(-2)],
@@ -33,13 +37,8 @@ const moneyFormat = locale => ({
     }
   }
 })
-
-const defaultOptions = {
-  fallbackToKey: true
-}
-
-const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE) => {
-  const withTranslation = ({ translations, format = {}, scope = null } = {}) => {
+const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE, globalFormats = {}) => {
+  const withTranslation = ({ translations, formats = {}, scope = null } = {}) => {
     const preHeatedTranslations = merge({}, globalTranslations, translations)
 
     return Component => {
@@ -59,10 +58,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
         }
 
         getTranslateFunc = memoize((propsTranslations, locale = defaultLocale) => {
-          const formats = {
-            ...moneyFormat(locale),
-            ...format
-          }
+          const mergedFormats = merge({}, getMoneyFormat(locale), globalFormats[locale], formats[locale])
 
           const translateFunc = (key, translateOptions) => {
             const lookupKey = scope ? `${scope}.${key}` : key
@@ -82,7 +78,7 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
 
             // Return the formatted string for numbers and strings
             if (isNumber(value) || isString(value)) {
-              const result = new IntlFormat(value, kebabCase(locale), formats)
+              const result = new IntlFormat(value, kebabCase(locale), mergedFormats)
               return result.format({ ...this.props, ...options })
             }
 
