@@ -213,3 +213,35 @@ exports[`Translate components uses the key when no translation is found and warn
   </Component>
 </WrappedComponent>
 `;
+
+exports[`Translate components with custom formats allows for custom formats on a global level 1`] = `
+<WrappedComponent
+  amount={42.37}
+  translations={Object {}}
+>
+  <Component
+    amount={42.37}
+    translate={[Function]}
+  >
+    <span>
+      Dat macht 42,37 $US
+    </span>
+  </Component>
+</WrappedComponent>
+`;
+
+exports[`Translate components with custom formats works with custom formats passed to withTranslation 1`] = `
+<WrappedComponent
+  amount={42.37}
+  translations={Object {}}
+>
+  <Component
+    amount={42.37}
+    translate={[Function]}
+  >
+    <span>
+      Dat macht 42,37 $US
+    </span>
+  </Component>
+</WrappedComponent>
+`;

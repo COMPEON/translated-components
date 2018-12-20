@@ -44,6 +44,7 @@ const translations = {
     message: 'Let\'s eat {numBurgers, plural, =0 {no burgers} =1 {one burger} other {# burgers}} today.'
   },
   fr_FR: {
+    kebabLabel: 'Dat macht {amount, number, mark}',
     title: 'This is going to be {interpolated}'
   }
 }
@@ -51,8 +52,8 @@ const translations = {
 describe('Translate components', () => {
   const withTranslation = createWithTranslation(globalTranslations)
 
-  const subject = (Component, { locale, scope, ...rest }) => {
-    const WrappedComponent = withTranslation({ translations, scope })(Component)
+  const subject = (Component, { locale, scope, formats, ...rest }) => {
+    const WrappedComponent = withTranslation({ translations, scope, formats })(Component)
 
     return mount(
       <TranslationProvider value={locale}>
@@ -108,6 +109,44 @@ describe('Translate components', () => {
 
     expect(subject(Component, { locale: 'de_AT', amount: 42.37 })).toMatchSnapshot()
     expect(subject(Component, { locale: 'de_CH', amount: 2500.01 })).toMatchSnapshot()
+  })
+
+  describe('with custom formats', () => {
+    const customFormats = {
+      fr_FR: {
+        number: {
+          mark: {
+            currency: 'USD',
+            minimumFractionDigits: 2,
+            style: 'currency'
+          }
+        }
+      }
+    }
+
+    it('works with custom formats passed to withTranslation', () => {
+      const Component = ({ translate }) => <span>{translate('kebabLabel')}</span>
+
+      expect(subject(Component, { locale: 'fr_FR', amount: 42.37, formats: customFormats })).toMatchSnapshot()
+    })
+
+    it('allows for custom formats on a global level', () => {
+      const withTranslation = createWithTranslation(globalTranslations, undefined, customFormats)
+
+      const subject = (Component, { locale, scope, formats, ...rest }) => {
+        const WrappedComponent = withTranslation({ translations, scope, customFormats })(Component)
+
+        return mount(
+          <TranslationProvider value={locale}>
+            <WrappedComponent {...rest} />
+          </TranslationProvider>
+        )
+      }
+
+      const Component = ({ translate }) => <span>{translate('kebabLabel')}</span>
+
+      expect(subject(Component, { locale: 'fr_FR', amount: 42.37 })).toMatchSnapshot()
+    })
   })
 
   it('handles pluralisation', () => {
