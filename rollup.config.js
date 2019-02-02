@@ -8,12 +8,12 @@ export default {
   output: [
     {
       file: 'dist/translated-components.umd.js',
-      name: 'monthpicker',
+      name: 'translated-components',
       format: 'umd'
     },
     {
       file: 'dist/translated-components.es.js',
-      name: 'monthpicker',
+      name: 'translated-components',
       format: 'es'
     }
   ],
