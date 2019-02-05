@@ -20,6 +20,9 @@
     "lint": "eslint src",
     "build": "rollup -c"
   },
+  "peerDependencies": {
+    "react": "^16.8.0-alpha.1"
+  },
   "dependencies": {
     "intl-messageformat": "^2.2.0",
     "lodash.get": "^4.4.2",
@@ -28,8 +31,7 @@
     "lodash.isstring": "^4.0.1",
     "lodash.kebabcase": "^4.1.1",
     "lodash.memoize": "^4.1.2",
-    "lodash.merge": "^4.6.1",
-    "react": "^16.5.2"
+    "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -51,7 +53,8 @@
     "eslint-plugin-standard": "^4.0.0",
     "icu4c-data": "62l",
     "jest": "^23.6.0",
-    "react-dom": "^16.5.2",
+    "react": "16.8.0-alpha.1",
+    "react-dom": "16.8.0-alpha.1",
     "rollup": "^0.66.6",
     "rollup-plugin-babel": "^4.0.3"
   },

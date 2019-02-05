@@ -1,10 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 import get from 'lodash.get'
 import merge from 'lodash.merge'
 import isString from 'lodash.isstring'
 import kebabCase from 'lodash.kebabcase'
 import isNumber from 'lodash.isnumber'
-import memoize from 'lodash.memoize'
 import isPlainObject from 'lodash.isplainobject'
 import IntlFormat from 'intl-messageformat'
 
@@ -14,105 +13,59 @@ const defaultOptions = {
   fallbackToKey: true
 }
 
-const {
-  Provider: TranslationProvider,
-  Consumer: TranslationConsumer
-} = React.createContext(DEFAULT_LOCALE)
+const localeContext = React.createContext()
 
-const CURRENCY_BY_REGION = {
-  AT: 'EUR',
-  CH: 'CHF',
-  DE: 'EUR',
-  FR: 'EUR',
-  GB: 'GPB',
-  US: 'USD'
+function warnAboutMissingTranslation (key) {
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn(`@TODO: Key "${key}" was not found. Falling back to the key as translation`)
+  }
+
+  return key.split('.').pop()
 }
 
-const getMoneyFormat = locale => ({
-  number: {
-    money: {
-      currency: CURRENCY_BY_REGION[locale.slice(-2)],
-      minimumFractionDigits: 0,
-      style: 'currency'
-    }
-  }
-})
-const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_LOCALE, globalFormats = {}) => {
-  const withTranslation = ({ translations, formats = {}, scope = null } = {}) => {
-    const preHeatedTranslations = merge({}, globalTranslations, translations)
+function createUseTranslate (globalTranslations = {}, fallbackLocale = DEFAULT_LOCALE, globalFormats = {}) {
+  return function useTranslate (props, options = {}) {
+    const { translations, formats = {}, scope } = options
 
-    return Component => {
-      const displayName = Component.displayName || Component.name || 'withTranslation(Component)'
+    const locale = React.useContext(localeContext) || fallbackLocale
+    const propsTranslations = props.translations || {}
+    const mergedFormats = merge({}, globalFormats[locale], formats[locale])
 
-      return class WrappedComponent extends React.Component {
-        static defaultProps = {
-          translations: {}
-        }
+    return React.useCallback(function translate (key, translateOptions) {
+      const lookupKey = scope ? `${scope}.${key}` : key
 
-        warnAboutMissingTranslation = key => {
-          if (process.env.NODE_ENV !== 'production') {
-            console.warn(`${displayName}: Key "${key}" was not found. Falling back to the key as translation`)
-          }
+      const options = { ...defaultOptions, ...translateOptions }
 
-          return key.split('.').pop()
-        }
+      const value = (
+        get(propsTranslations[locale], lookupKey) ||
+        get(translations[locale], lookupKey) ||
+        get(globalTranslations[locale], lookupKey) ||
+        (options.fallbackToKey ? warnAboutMissingTranslation(lookupKey) : null)
+      )
 
-        getTranslateFunc = memoize((propsTranslations, locale = defaultLocale) => {
-          const mergedFormats = merge({}, getMoneyFormat(locale), globalFormats[locale], formats[locale])
-
-          const translateFunc = (key, translateOptions) => {
-            const lookupKey = scope ? `${scope}.${key}` : key
-
-            const options = {
-              ...defaultOptions,
-              ...translateOptions
-            }
-
-            const value = (
-              get(propsTranslations[locale], lookupKey) ||
-              get(preHeatedTranslations[locale], lookupKey) ||
-              get(propsTranslations[defaultLocale], lookupKey) ||
-              get(preHeatedTranslations[defaultLocale], lookupKey) ||
-              (options.fallbackToKey ? this.warnAboutMissingTranslation(lookupKey) : null)
-            )
-
-            // Return the formatted string for numbers and strings
-            if (isNumber(value) || isString(value)) {
-              const result = new IntlFormat(value, kebabCase(locale), mergedFormats)
-              return result.format({ ...this.props, ...options })
-            }
-
-            // Return another translate function for enum properties
-            if (isPlainObject(value)) return subkey => translateFunc(`${key}.${subkey}`, options)
-
-            return value
-          }
-
-          return translateFunc
-        })
-
-        render () {
-          const { translations, ...props } = this.props
-
-          return (
-            <TranslationConsumer>
-              {locale => (
-                <Component translate={this.getTranslateFunc(this.props.translations, locale)} {...props} />
-              )}
-            </TranslationConsumer>
-          )
-        }
+      // Return the formatted string for numbers and strings
+      if (isNumber(value) || isString(value)) {
+        return React.useMemo(() => {
+          const result = new IntlFormat(value, kebabCase(locale), mergedFormats)
+          return result.format({ ...props, ...options })
+        }, [value, props])
       }
-    }
-  }
 
-  return withTranslation
+      // Return another translate function for enum properties
+      if (isPlainObject(value)) return subkey => translate(`${key}.${subkey}`, options)
+
+      return value
+    }, [propsTranslations, locale, formats])
+  }
 }
 
-const withTranslation = createWithTranslation({})
+const { Provider: TranslationProvider, Consumer: TranslationConsumer } = localeContext
+
+const useTranslate = createUseTranslate({})
 
 export {
   TranslationProvider,
-  withTranslation,
-  createWithTranslation
+  TranslationConsumer,
+  useTranslate,
+  createUseTranslate
 }
