@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '10'
+  - '12'
 
 cache:
   yarn: true
@@ -11,7 +11,7 @@ before_install:
   - export TZ=Europe/Berlin
 
 before_script:
-  - export NODE_ICU_DATA=node_modules/icu4c-data
+  - export NODE_ICU_DATA=node_modules/full-icu
 
 script:
   - yarn test
