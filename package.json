@@ -18,6 +18,7 @@
     "test": "jest",
     "test:dev": "jest --watch",
     "lint": "eslint src",
+    "prepublishOnly": "yarn test && yarn build",
     "build": "rollup -c"
   },
   "dependencies": {
