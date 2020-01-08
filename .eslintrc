@@ -15,5 +15,10 @@
     "no-unused-vars"                    : [2, { "args": "after-used", "ignoreRestSiblings": true }],
     "object-curly-spacing"              : [2, "always"],
     "semi"                              : [2, "never"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
