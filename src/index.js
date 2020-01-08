@@ -1,4 +1,5 @@
 import React from 'react'
+import { object } from 'prop-types'
 import get from 'lodash.get'
 import merge from 'lodash.merge'
 import isString from 'lodash.isstring'
@@ -45,6 +46,10 @@ const createWithTranslation = (globalTranslations = {}, defaultLocale = DEFAULT_
       const displayName = Component.displayName || Component.name || 'withTranslation(Component)'
 
       return class WrappedComponent extends React.Component {
+        static propTypes = {
+          translations: object
+        }
+
         static defaultProps = {
           translations: {}
         }
