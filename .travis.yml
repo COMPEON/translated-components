@@ -14,4 +14,5 @@ before_script:
   - export NODE_ICU_DATA=node_modules/full-icu
 
 script:
+  - yarn lint
   - yarn test
