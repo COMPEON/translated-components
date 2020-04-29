@@ -824,11 +824,11 @@
     minimist "^1.2.0"
 
 "@formatjs/intl-pluralrules@^1.4.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-1.5.2.tgz#3e37f38e21b6a30c484e9138187d0a1a4b0d1f76"
-  integrity sha512-kxCufLRBOaj9x4PP2QrYmYSmr2WfJnBmUx/6eaajuaHlXTfXvLD1Dz/s1YBXHipOlorh51ehHQPoRgrOCNNpkA==
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-1.5.7.tgz#625a448efffce1ac604d9dbb7afdb411987f6f78"
+  integrity sha512-MFODyHeI+OjafC8D+yBHkH6eE8y0nzGEkyEJSIq0ZJLjQOB4NxcAW62+L7jBDUHyvGzUea1TeuyJsSIoEvJXuQ==
   dependencies:
-    "@formatjs/intl-utils" "^2.2.0"
+    "@formatjs/intl-utils" "^2.2.4"
 
 "@formatjs/intl-unified-numberformat@^3.2.0":
   version "3.2.0"
@@ -837,10 +837,10 @@
   dependencies:
     "@formatjs/intl-utils" "^2.2.0"
 
-"@formatjs/intl-utils@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-2.2.0.tgz#ba6e12fe64ff7fd160be392007c47d24b7ae5c75"
-  integrity sha512-+Az7tR1av1DHZu9668D8uh9atT6vp+FFmEF8BrEssv0OqzpVjpVBGVmcgPzQP8k2PQjVlm/h2w8cTt0knn132w==
+"@formatjs/intl-utils@^2.2.0", "@formatjs/intl-utils@^2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-2.2.4.tgz#fe62a96799d1f7dbe621fd38a4bd2e5a6a16cb0e"
+  integrity sha512-83fsJywew0o9wQsW3VuEp33HRiFd0qbQDyFFnwZCwk59eLZ33CtKyJ5ofKMrU2KK6hk1zaIdzisrZeoNfmI3Tw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
