@@ -823,12 +823,12 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@formatjs/intl-pluralrules@^1.4.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-1.5.2.tgz#3e37f38e21b6a30c484e9138187d0a1a4b0d1f76"
-  integrity sha512-kxCufLRBOaj9x4PP2QrYmYSmr2WfJnBmUx/6eaajuaHlXTfXvLD1Dz/s1YBXHipOlorh51ehHQPoRgrOCNNpkA==
+"@formatjs/intl-pluralrules@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-2.2.2.tgz#482cc51df14b3c260efd54b49299acb602733058"
+  integrity sha512-8lS43TD4FAFgNupf76VQvJZu3lTo4D7hOuBFx7qk+EVsJMtscg708p083tpM1BVOeDMxpcCdVtWsC0uqR2euTA==
   dependencies:
-    "@formatjs/intl-utils" "^2.2.0"
+    "@formatjs/intl-utils" "^3.2.0"
 
 "@formatjs/intl-unified-numberformat@^3.2.0":
   version "3.2.0"
@@ -841,6 +841,11 @@
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-2.2.0.tgz#ba6e12fe64ff7fd160be392007c47d24b7ae5c75"
   integrity sha512-+Az7tR1av1DHZu9668D8uh9atT6vp+FFmEF8BrEssv0OqzpVjpVBGVmcgPzQP8k2PQjVlm/h2w8cTt0knn132w==
+
+"@formatjs/intl-utils@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-3.2.0.tgz#637093cedb68f1aeb7cc4af9ee5a736e7af9620c"
+  integrity sha512-mMbu+V65bJO2WyIQM2gEfaiOSsHdCbf0YGxHFTDfFBqvQp4DLIV0K4OAeoPUxgluJxLlL/VbWJRZfNpeGUWwsw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
