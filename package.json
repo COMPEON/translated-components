@@ -59,7 +59,9 @@
     "rollup-plugin-babel": "^4.0.3"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/test/setup/enzyme.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup/enzyme.js"
+    ],
     "testPathIgnorePatterns": [
       "<rootDir>/test/setup/"
     ],
