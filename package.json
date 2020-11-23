@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@formatjs/intl-pluralrules": "^1.4.2",
-    "intl-messageformat": "^7.8.0",
+    "intl-messageformat": "^9.3.19",
     "lodash.get": "^4.4.2",
     "lodash.isnumber": "^3.0.3",
     "lodash.isplainobject": "^4.0.6",
