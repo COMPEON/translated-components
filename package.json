@@ -22,7 +22,7 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@formatjs/intl-pluralrules": "^1.4.2",
+    "@formatjs/intl-pluralrules": "^4.0.0",
     "intl-messageformat": "^7.8.0",
     "lodash.get": "^4.4.2",
     "lodash.isnumber": "^3.0.3",
