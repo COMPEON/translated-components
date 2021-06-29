@@ -940,12 +940,20 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@formatjs/intl-pluralrules@^1.4.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-1.5.2.tgz#3e37f38e21b6a30c484e9138187d0a1a4b0d1f76"
-  integrity sha512-kxCufLRBOaj9x4PP2QrYmYSmr2WfJnBmUx/6eaajuaHlXTfXvLD1Dz/s1YBXHipOlorh51ehHQPoRgrOCNNpkA==
+"@formatjs/ecma402-abstract@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.9.4.tgz#797ae6c407fb5a0d09023a60c86f19aca1958c5e"
+  integrity sha512-ePJXI7tWC9PBxQxS7jtbkCLGVmpC8MH8n9Yjmg8dsh9wXK9svu7nAbq76Oiu5Zb+5GVkLkeTVerlSvHCbNImlA==
   dependencies:
-    "@formatjs/intl-utils" "^2.2.0"
+    tslib "^2.1.0"
+
+"@formatjs/intl-pluralrules@^4.0.28":
+  version "4.0.28"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-4.0.28.tgz#9d7a4a5b760b909abd4f92ee311c1188e976c627"
+  integrity sha512-sWtOHwEff6/cHuSk5l6zpcB3POPCYlBx3DUGASb7QU6AD/tO/oKW6oRHOCHbBdspkBEsUJByZ9LlP2r0Xw6yPQ==
+  dependencies:
+    "@formatjs/ecma402-abstract" "1.9.4"
+    tslib "^2.1.0"
 
 "@formatjs/intl-unified-numberformat@^3.2.0":
   version "3.2.0"
@@ -5443,6 +5451,11 @@ tsconfig-paths@^3.9.0:
     json5 "^1.0.1"
     minimist "^1.2.0"
     strip-bom "^3.0.0"
+
+tslib@^2.1.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
