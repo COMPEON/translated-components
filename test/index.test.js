@@ -87,7 +87,7 @@ describe('Translate components', () => {
 
   it('uses the key when no translation is found and warns about it', () => {
     const Component = ({ translate }) => <span>{translate('carsten.kurt.maschmüller')}</span>
-    const warn = jest.spyOn(global.console, 'warn')
+    const warn = jest.spyOn(global.console, 'warn').mockImplementation(() => {})
 
     expect(subject(Component, { locale: 'de_DE' })).toMatchSnapshot()
     expect(warn).toHaveBeenCalledWith(
