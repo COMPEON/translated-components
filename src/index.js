@@ -1,8 +1,9 @@
 import '@formatjs/intl-pluralrules/polyfill'
-import '@formatjs/intl-pluralrules/dist/locale-data/de'
-import '@formatjs/intl-pluralrules/dist/locale-data/en'
-import '@formatjs/intl-pluralrules/dist/locale-data/fr'
-import '@formatjs/intl-pluralrules/dist/locale-data/uk'
+import '@formatjs/intl-getcanonicallocales/polyfill'
+import '@formatjs/intl-pluralrules/locale-data/de'
+import '@formatjs/intl-pluralrules/locale-data/en'
+import '@formatjs/intl-pluralrules/locale-data/fr'
+import '@formatjs/intl-pluralrules/locale-data/uk'
 
 import React from 'react'
 import { object } from 'prop-types'
