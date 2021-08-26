@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel'
+import { babel } from '@rollup/plugin-babel'
 import pkg from './package.json'
 
 const external = Object.keys(pkg.dependencies)
@@ -19,10 +19,11 @@ export default {
   ],
   plugins: [
     babel({
+      babelHelpers: 'runtime',
       babelrc: false,
       exclude: 'node_modules/**',
-      plugins: ['@babel/proposal-class-properties'],
-      presets: [['@babel/env', { modules: false }], '@babel/react']
+      plugins: ['@babel/plugin-transform-runtime', '@babel/proposal-class-properties'],
+      presets: [['@babel/preset-env', { modules: false }], '@babel/preset-react']
     })
   ],
   external
