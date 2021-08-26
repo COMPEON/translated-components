@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added / Changed / Deleted
 
+## [0.2.0] - 2021-08-26
+### BREAKING CHANGES
+- Removed `@formatjs/intl-pluralrules` polyfill.
+  Apps now need to provide the polyfills required for `intl-messageformat` themselves.
+  Check https://formatjs.io/docs/intl-messageformat for help.
+
 ## [0.1.4] - 2021-06-11
 ### Security
 - Dependency updates
