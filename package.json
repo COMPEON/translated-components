@@ -1,6 +1,6 @@
 {
   "name": "@compeon/translated-components",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Applies the component thinking to i18n",
   "main": "dist/translated-components.umd.js",
   "module": "dist/translated-components.es.js",
@@ -22,7 +22,6 @@
     "build": "rollup -c"
   },
   "dependencies": {
-    "@formatjs/intl-pluralrules": "^1.4.2",
     "intl-messageformat": "^7.8.0",
     "lodash.get": "^4.4.2",
     "lodash.isnumber": "^3.0.3",
