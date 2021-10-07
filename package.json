@@ -61,6 +61,7 @@
     "setupFilesAfterEnv": [
       "<rootDir>/test/setup/enzyme.js"
     ],
+    "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
       "<rootDir>/test/setup/"
     ],
