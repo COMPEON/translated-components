@@ -1,0 +1,21 @@
+name: CI
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      LANG: de_DE.UTF-8
+      TZ: Europe/Berlin
+    strategy:
+      matrix:
+        node-version: [ "12", "16" ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+      - run: yarn --prefer-offline
+      - run: yarn lint
+      - run: yarn test --ci
