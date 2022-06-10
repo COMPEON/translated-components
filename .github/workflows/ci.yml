@@ -3,6 +3,7 @@ on: push
 
 env:
   NODE_VERSION: "16"
+  TZ: Europe/Berlin
 
 jobs:
   test:
@@ -13,6 +14,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: yarn
-      - run: TZ=Europe/Berlin yarn --prefer-offline
+      - run: yarn --prefer-offline
       - run: yarn lint
       - run: yarn test --ci
