@@ -52,6 +52,7 @@
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-standard": "^5.0.0",
     "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
     "prop-types": "^15.7.2",
     "react-dom": "^16.14.0",
     "rollup": "^2.51.0"
