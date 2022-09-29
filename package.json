@@ -1,5 +1,5 @@
 {
-  "name": "@compeon/translated-components",
+  "name": "@compeon-os/translated-components",
   "version": "0.2.3",
   "description": "Applies the component thinking to i18n",
   "main": "dist/translated-components.umd.js",
