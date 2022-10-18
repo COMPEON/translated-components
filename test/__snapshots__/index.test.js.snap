@@ -2,7 +2,7 @@
 
 exports[`Translate components allows for disabling key fallback per translation through options 1`] = `
 <WrappedComponent
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     translate={[Function]}
@@ -15,7 +15,7 @@ exports[`Translate components allows for disabling key fallback per translation 
 exports[`Translate components allows for overwriting prop values by passing options to translate 1`] = `
 <WrappedComponent
   interpolated="Kurt"
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     interpolated="Kurt"
@@ -30,7 +30,7 @@ exports[`Translate components allows for overwriting prop values by passing opti
 
 exports[`Translate components allows for setting a scope in withTranslation 1`] = `
 <WrappedComponent
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     translate={[Function]}
@@ -44,7 +44,7 @@ exports[`Translate components allows for setting a scope in withTranslation 1`] 
 
 exports[`Translate components allows for translation of enum values 1`] = `
 <WrappedComponent
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     translate={[Function]}
@@ -59,7 +59,7 @@ exports[`Translate components allows for translation of enum values 1`] = `
 exports[`Translate components does not touch non-translation props 1`] = `
 <WrappedComponent
   notToBeTranslated={99}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     notToBeTranslated={99}
@@ -74,7 +74,7 @@ exports[`Translate components does not touch non-translation props 1`] = `
 
 exports[`Translate components falls back to the global translations 1`] = `
 <WrappedComponent
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     translate={[Function]}
@@ -89,7 +89,7 @@ exports[`Translate components falls back to the global translations 1`] = `
 exports[`Translate components formats money correctly for the language 1`] = `
 <WrappedComponent
   amount={42.37}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     amount={42.37}
@@ -105,7 +105,7 @@ exports[`Translate components formats money correctly for the language 1`] = `
 exports[`Translate components formats money correctly for the language 2`] = `
 <WrappedComponent
   amount={2500.01}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     amount={2500.01}
@@ -121,7 +121,7 @@ exports[`Translate components formats money correctly for the language 2`] = `
 exports[`Translate components handles pluralisation 1`] = `
 <WrappedComponent
   numBurgers={0}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     numBurgers={0}
@@ -137,7 +137,7 @@ exports[`Translate components handles pluralisation 1`] = `
 exports[`Translate components handles pluralisation 2`] = `
 <WrappedComponent
   numBurgers={1}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     numBurgers={1}
@@ -153,7 +153,7 @@ exports[`Translate components handles pluralisation 2`] = `
 exports[`Translate components handles pluralisation 3`] = `
 <WrappedComponent
   numBurgers={99}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     numBurgers={99}
@@ -168,7 +168,7 @@ exports[`Translate components handles pluralisation 3`] = `
 
 exports[`Translate components translates values using the locale 1`] = `
 <WrappedComponent
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     translate={[Function]}
@@ -183,8 +183,8 @@ exports[`Translate components translates values using the locale 1`] = `
 exports[`Translate components uses a translation from the translation props 1`] = `
 <WrappedComponent
   translations={
-    Object {
-      "en_GB": Object {
+    {
+      "en_GB": {
         "title": "Proper title",
       },
     }
@@ -202,7 +202,7 @@ exports[`Translate components uses a translation from the translation props 1`] 
 
 exports[`Translate components uses the key when no translation is found and warns about it 1`] = `
 <WrappedComponent
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     translate={[Function]}
@@ -217,7 +217,7 @@ exports[`Translate components uses the key when no translation is found and warn
 exports[`Translate components with custom formats allows for custom formats on a global level 1`] = `
 <WrappedComponent
   amount={42.37}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     amount={42.37}
@@ -233,7 +233,7 @@ exports[`Translate components with custom formats allows for custom formats on a
 exports[`Translate components with custom formats works with custom formats passed to withTranslation 1`] = `
 <WrappedComponent
   amount={42.37}
-  translations={Object {}}
+  translations={{}}
 >
   <Component
     amount={42.37}
