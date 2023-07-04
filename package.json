@@ -55,7 +55,7 @@
     "jest-environment-jsdom": "^29.0.1",
     "prop-types": "^15.7.2",
     "react-dom": "^16.14.0",
-    "rollup": "^2.51.0"
+    "rollup": "^3.26.0"
   },
   "jest": {
     "setupFilesAfterEnv": [
